@@ -8,12 +8,12 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "ApiKey")
-public class ApiKey
+public class ApiKey implements Serializable
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id", unique = true, nullable = false)
-    private int apikeyid = 0;
+    private int id;
 
     @Column(name = "user", unique = false, nullable = false)
     private int user;

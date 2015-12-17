@@ -17,9 +17,8 @@
         <!-- Echo all executed SQL statements -->
         <property name="show_sql">true</property>
 
-        <!-- Enable Hibernate's automatic session context management
+        <!-- Enable Hibernate's automatic session context management-->
         <property name="current_session_context_class">thread</property>
-        -->
 
         <!-- Auto create or update tables
         <property name="hbm2ddl.auto">update</property>

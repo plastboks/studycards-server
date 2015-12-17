@@ -1,7 +1,9 @@
 package net.plastboks.studycards.util;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
  * Created by alex on 12/17/15.
@@ -9,17 +11,16 @@ import org.hibernate.cfg.Configuration;
 public class HibernateUtil
 {
     private static final String cfgPath = "/xml/hibernate.cfg.xml";
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory sessionFactory = buildSessionFactory();
 
     private static SessionFactory buildSessionFactory()
     {
+        final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
+                .configure(cfgPath).build();
         try {
-            SessionFactory sessionFactory = new Configuration()
-                    .configure(cfgPath).buildSessionFactory();
-            return sessionFactory;
+            return new MetadataSources(registry).buildMetadata().buildSessionFactory();
         } catch (Throwable ex) {
-            System.out.println("=> Could not load configuration file");
-            System.out.println("=> Working Directory = " + System.getProperty("user.dir"));
+            StandardServiceRegistryBuilder.destroy(registry);
             throw new ExceptionInInitializerError(ex);
         }
     }
