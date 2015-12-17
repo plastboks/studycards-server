@@ -15,16 +15,6 @@ public class App
 {
     public static void main(String ... args)
     {
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = session.beginTransaction();
-
-        User user = new User("user@example.com");
-
-        tx.begin();
-        session.save(user);
-        tx.commit();
-        session.flush();
-
         SpringApplication.run(App.class, args);
     }
 }
