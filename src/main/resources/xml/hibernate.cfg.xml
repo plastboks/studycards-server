@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="connection.url">jdbc:derby:memory:studycards;create=true</property>
+        <property name="connection.driver_class">org.apache.derby.jdbc.EmbeddedDriver</property>
+
+        <!--
+        <property name="connection.username">studycards</property>
+        -->
+        <property name="dialect">org.hibernate.dialect.DerbyDialect</property>
+
+        <!-- Echo all executed SQL statements -->
+        <property name="show_sql">true</property>
+
+        <!-- Enable Hibernate's automatic session context management
+        <property name="current_session_context_class">thread</property>
+        -->
+
+        <!-- Auto create or update tables
+        <property name="hbm2ddl.auto">update</property>
+        -->
+
+        <!-- Mapping resource configuration files -->
+        <mapping class="net.plastboks.studycards.model.User"/>
+        <mapping class="net.plastboks.studycards.model.ApiKey"/>
+
+    </session-factory>
+</hibernate-configuration>

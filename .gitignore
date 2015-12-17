@@ -2,3 +2,4 @@ build
 .gradle
 studycards.iml
 .idea
+derby.log
