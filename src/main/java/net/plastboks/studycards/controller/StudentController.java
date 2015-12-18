@@ -1,12 +1,10 @@
 package net.plastboks.studycards.controller;
 
-import net.plastboks.studycards.model.StudentDAO;
+import net.plastboks.studycards.model.dao.StudentDAO;
 import net.plastboks.studycards.model.type.Student;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.List;
 
 /**
  * Created by alex on 12/17/15.
@@ -14,11 +12,17 @@ import java.util.concurrent.atomic.AtomicLong;
 @RestController
 public class StudentController
 {
-    private final AtomicLong counter = new AtomicLong();
+    private final StudentDAO studentDAO = new StudentDAO();
 
-    @RequestMapping("/greeting")
-    public String student()
+    @RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
+    public Student getStudent(@PathVariable int id)
     {
-        return new String("ping");
+        return studentDAO.getById(id, true);
+    }
+
+    @RequestMapping(value = "/student", method = RequestMethod.GET)
+    public List<Student> getStudents()
+    {
+        return studentDAO.get();
     }
 }

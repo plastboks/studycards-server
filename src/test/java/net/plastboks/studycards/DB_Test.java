@@ -1,7 +1,7 @@
 package net.plastboks.studycards;
 
-import net.plastboks.studycards.model.ColloquiumDAO;
-import net.plastboks.studycards.model.StudentDAO;
+import net.plastboks.studycards.model.dao.ColloquiumDAO;
+import net.plastboks.studycards.model.dao.StudentDAO;
 import net.plastboks.studycards.model.type.*;
 import org.junit.Test;
 import static org.junit.Assert.*;

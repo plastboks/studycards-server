@@ -38,4 +38,29 @@ public class ApiKey implements Serializable
     }
 
     private ApiKey() {}
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getValue()
+    {
+        return value;
+    }
+
+    public Date getCreated()
+    {
+        return created;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
+    }
 }

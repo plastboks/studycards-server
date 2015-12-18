@@ -25,4 +25,19 @@ public class Play
     private Date updated;
 
     private Play() {}
+
+    public Long getId()
+    {
+        return id;
+    }
+
+    public Date getCreated()
+    {
+        return created;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
+    }
 }

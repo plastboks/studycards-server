@@ -1,4 +1,4 @@
-package net.plastboks.studycards.model;
+package net.plastboks.studycards.model.dao;
 
 /**
  * Created by alex on 12/18/15.

@@ -1,5 +1,6 @@
 package net.plastboks.studycards.model.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -30,12 +31,14 @@ public class Deck implements Serializable
     private Date updated;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "decks")
+    @JsonIgnore
     private Set<Colloquium> colloquia;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "deck_question", joinColumns =
             { @JoinColumn(name = "did", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "qid") })
+    @JsonIgnore
     private Set<Question> questions;
 
     public Deck(String name)
@@ -44,6 +47,26 @@ public class Deck implements Serializable
     }
 
     private Deck() {}
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public Date getCreated()
+    {
+        return created;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
+    }
 
     public Set<Colloquium> getColloquia()
     {

@@ -13,8 +13,8 @@ apply plugin: 'idea'
 apply plugin: 'spring-boot'
 
 jar {
-    baseName = 'gs-rest-service'
-    version =  '0.1.0'
+    baseName = 'studycards-server'
+    version =  '0.0.1'
 }
 
 repositories {
@@ -53,7 +53,6 @@ dependencies {
     compile("org.postgresql:postgresql")
     compile("org.hibernate:hibernate-core:5.0.5.Final")
     compile("javax.transaction:jta:1.1")
-    compile("org.apache.derby:derby:10.12.1.1")
     testCompile("junit:junit")
 }
 

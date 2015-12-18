@@ -1,9 +1,12 @@
-package net.plastboks.studycards.model;
+package net.plastboks.studycards.model.dao;
 
+import net.plastboks.studycards.model.dao.DAO;
 import net.plastboks.studycards.model.type.Student;
 import net.plastboks.studycards.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
+
+import java.util.List;
 
 /**
  * Created by alex on 12/18/15.
@@ -19,6 +22,19 @@ public class StudentDAO implements DAO<Student>
         session.save(student);
 
         session.getTransaction().commit();
+    }
+
+    public List<Student> get()
+    {
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+        session.getTransaction().begin();
+
+        List<Student> students = session.createCriteria(Student.class).list();
+
+        session.close();
+
+        return students;
     }
 
     public Student getById(int id)

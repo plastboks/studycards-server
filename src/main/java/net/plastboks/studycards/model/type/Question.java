@@ -1,5 +1,6 @@
 package net.plastboks.studycards.model.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -21,6 +22,7 @@ public class Question implements Serializable
     private Integer id;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "questions")
+    @JsonIgnore
     private Set<Deck> decks;
 
     @Column(name = "question", unique = false, nullable = false)
@@ -42,4 +44,34 @@ public class Question implements Serializable
     }
 
     private Question() {}
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public Set<Deck> getDecks()
+    {
+        return decks;
+    }
+
+    public String getQuestion()
+    {
+        return question;
+    }
+
+    public String getAnswer()
+    {
+        return answer;
+    }
+
+    public Date getCreated()
+    {
+        return created;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
+    }
 }

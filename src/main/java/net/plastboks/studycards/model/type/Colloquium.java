@@ -1,5 +1,6 @@
 package net.plastboks.studycards.model.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -25,6 +26,7 @@ public class Colloquium implements Serializable
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "colloquia")
+    @JsonIgnore
     private Set<Student> students;
 
     @CreationTimestamp
@@ -37,6 +39,7 @@ public class Colloquium implements Serializable
     @JoinTable(name = "colloquium_deck", joinColumns =
             { @JoinColumn(name = "cid", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "did") })
+    @JsonIgnore
     private Set<Deck> decks = new LinkedHashSet<>(0);
 
     public Colloquium(String name)

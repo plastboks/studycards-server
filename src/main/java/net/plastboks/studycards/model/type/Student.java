@@ -1,5 +1,6 @@
 package net.plastboks.studycards.model.type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -28,6 +29,7 @@ public class Student implements Serializable
     private String email;
 
     @Column(name = "passwd", unique = true, nullable = false)
+    @JsonIgnore
     private String password;
 
     @CreationTimestamp
@@ -39,12 +41,14 @@ public class Student implements Serializable
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "student")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
+    @JsonIgnore
     private Set<ApiKey> keys;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_colloquium", joinColumns =
             { @JoinColumn(name = "uid", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "gid") })
+    @JsonIgnore
     private Set<Colloquium> colloquia;
 
     public Student(String email, String password)
