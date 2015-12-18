@@ -1,4 +1,4 @@
-package net.plastboks.studycards.model;
+package net.plastboks.studycards.model.type;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -29,10 +29,10 @@ public class Deck implements Serializable
     @UpdateTimestamp
     private Date updated;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "decks")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "decks")
     private Set<Colloquium> colloquia;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "deck_question", joinColumns =
             { @JoinColumn(name = "did", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "qid") })
@@ -42,6 +42,8 @@ public class Deck implements Serializable
     {
         this.name = name;
     }
+
+    private Deck() {}
 
     public Set<Colloquium> getColloquia()
     {

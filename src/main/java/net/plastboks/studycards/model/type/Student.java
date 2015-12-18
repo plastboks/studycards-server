@@ -1,5 +1,7 @@
-package net.plastboks.studycards.model;
+package net.plastboks.studycards.model.type;
 
+import net.plastboks.studycards.model.type.ApiKey;
+import net.plastboks.studycards.model.type.Colloquium;
 import org.hibernate.annotations.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -22,7 +24,7 @@ public class Student implements Serializable
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="sid", unique = true, nullable = false)
-    private Long id;
+    private Integer id;
 
     @Column(name = "email", unique = true, nullable = false)
     private String email;
@@ -36,12 +38,12 @@ public class Student implements Serializable
     @UpdateTimestamp
     private Date updated;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "student")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<ApiKey> keys;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "student_colloquium", joinColumns =
             { @JoinColumn(name = "uid", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "gid") })
@@ -56,6 +58,23 @@ public class Student implements Serializable
         Set<Colloquium> defaultColloquia = new LinkedHashSet<>();
         defaultColloquia.add(new Colloquium(email));
         setColloquia(defaultColloquia);
+    }
+
+    private Student() {}
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
+    }
+
+    public Date getCreated()
+    {
+        return created;
     }
 
     public Set<ApiKey> getKeys()

@@ -1,4 +1,4 @@
-package net.plastboks.studycards.model;
+package net.plastboks.studycards.model.type;
 
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -36,4 +36,6 @@ public class ApiKey implements Serializable
     {
         this.name = name;
     }
+
+    private ApiKey() {}
 }

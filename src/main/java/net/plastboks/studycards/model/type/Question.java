@@ -1,5 +1,6 @@
-package net.plastboks.studycards.model;
+package net.plastboks.studycards.model.type;
 
+import net.plastboks.studycards.model.type.Deck;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,7 +21,7 @@ public class Question implements Serializable
     @Column(name="qid", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "questions")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "questions")
     private Set<Deck> decks;
 
     @Column(name = "question", unique = false, nullable = false)
@@ -40,4 +41,6 @@ public class Question implements Serializable
         this.question = question;
         this.answer = answer;
     }
+
+    private Question() {}
 }

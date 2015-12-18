@@ -1,9 +1,9 @@
 package net.plastboks.studycards;
 
-import net.plastboks.studycards.model.*;
-import net.plastboks.studycards.util.HibernateUtil;
-import org.hibernate.Session;
+import net.plastboks.studycards.model.StudentDAO;
+import net.plastboks.studycards.model.type.*;
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,14 +13,15 @@ import java.util.Set;
  */
 public class DB_Test
 {
-    private Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
     @Test
     public void baseTest()
     {
-        session.getTransaction().begin();
+        String email = "john@example.com";
 
-        Student user = new Student("john@example.com", "ping");
+        StudentDAO studentDAO = new StudentDAO();
+
+        Student student = new Student(email, "ping");
 
         Set<ApiKey> keys = new HashSet<>();
 
@@ -28,7 +29,7 @@ public class DB_Test
         keys.add(new ApiKey("key2"));
         keys.add(new ApiKey("key3"));
 
-        user.setKeys(keys);
+        student.setKeys(keys);
 
 
         Colloquium col1 = new Colloquium("Col1");
@@ -54,10 +55,15 @@ public class DB_Test
         decks.add(deck2);
         col1.setDecks(decks);
 
-        user.getColloquia().add(col1);
+        student.getColloquia().add(col1);
 
-        session.save(user);
+        studentDAO.save(student);
 
-        session.getTransaction().commit();
+        Student retrieve = studentDAO.getById(1);
+
+        assertTrue(retrieve.getEmail().equals(email));
+        assertTrue(retrieve.getColloquia().size() == 2);
+        assertFalse(retrieve.getKeys().isEmpty());
+        assertFalse(retrieve.getCreated() == null);
     }
 }
