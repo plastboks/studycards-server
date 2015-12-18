@@ -24,7 +24,7 @@ public class Colloquium implements Serializable
     @Column(name = "name", unique = false, nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "colloquia")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "colloquia")
     private Set<Student> students;
 
     @CreationTimestamp
@@ -33,7 +33,7 @@ public class Colloquium implements Serializable
     @UpdateTimestamp
     private Date updated;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "colloquium_deck", joinColumns =
             { @JoinColumn(name = "cid", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "did") })
@@ -45,6 +45,26 @@ public class Colloquium implements Serializable
     }
 
     private Colloquium() {}
+
+    public Integer getId()
+    {
+        return id;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public Date getCreated()
+    {
+        return created;
+    }
+
+    public Date getUpdated()
+    {
+        return updated;
+    }
 
     public Set<Deck> getDecks()
     {

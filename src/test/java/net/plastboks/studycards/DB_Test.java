@@ -1,5 +1,6 @@
 package net.plastboks.studycards;
 
+import net.plastboks.studycards.model.ColloquiumDAO;
 import net.plastboks.studycards.model.StudentDAO;
 import net.plastboks.studycards.model.type.*;
 import org.junit.Test;
@@ -59,11 +60,18 @@ public class DB_Test
 
         studentDAO.save(student);
 
-        Student retrieve = studentDAO.getById(1);
+        Student retrieve = studentDAO.getById(1, true);
 
         assertTrue(retrieve.getEmail().equals(email));
         assertTrue(retrieve.getColloquia().size() == 2);
         assertFalse(retrieve.getKeys().isEmpty());
         assertFalse(retrieve.getCreated() == null);
+
+        for (Colloquium col : retrieve.getColloquia()) {
+            ColloquiumDAO colloquiumDAO = new ColloquiumDAO();
+            Colloquium c = colloquiumDAO.getById(col.getId(), true);
+
+            assertTrue(col.getName().equals(c.getName()));
+        }
     }
 }

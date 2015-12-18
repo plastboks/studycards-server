@@ -1,7 +1,5 @@
 package net.plastboks.studycards.model.type;
 
-import net.plastboks.studycards.model.type.ApiKey;
-import net.plastboks.studycards.model.type.Colloquium;
 import org.hibernate.annotations.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
@@ -38,12 +36,12 @@ public class Student implements Serializable
     @UpdateTimestamp
     private Date updated;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "student")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<ApiKey> keys;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_colloquium", joinColumns =
             { @JoinColumn(name = "uid", nullable = false, updatable = false) },
             inverseJoinColumns = { @JoinColumn(name = "gid") })

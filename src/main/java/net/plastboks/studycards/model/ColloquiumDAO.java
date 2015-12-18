@@ -1,6 +1,6 @@
 package net.plastboks.studycards.model;
 
-import net.plastboks.studycards.model.type.Student;
+import net.plastboks.studycards.model.type.Colloquium;
 import net.plastboks.studycards.util.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -8,39 +8,39 @@ import org.hibernate.Session;
 /**
  * Created by alex on 12/18/15.
  */
-public class StudentDAO implements DAO<Student>
+public class ColloquiumDAO implements DAO<Colloquium>
 {
-    public void save(Student student)
+    public void save(Colloquium colloquium)
     {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.getTransaction().begin();
 
-        session.save(student);
+        session.save(colloquium);
 
         session.getTransaction().commit();
     }
 
-    public Student getById(int id)
+    public Colloquium getById(int id)
     {
         return getById(id, false);
     }
 
-    public Student getById(int id, boolean joins)
+    public Colloquium getById(int id, boolean joins)
     {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
         session.getTransaction().begin();
 
-        Student student = session.get(Student.class, id);
+        Colloquium colloquium = session.get(Colloquium.class, id);
 
         if (joins) {
-            Hibernate.initialize(student.getColloquia());
-            Hibernate.initialize(student.getKeys());
+            Hibernate.initialize(colloquium.getDecks());
+            Hibernate.initialize(colloquium.getStudents());
         }
 
         session.close();
 
-        return student;
+        return colloquium;
     }
 }

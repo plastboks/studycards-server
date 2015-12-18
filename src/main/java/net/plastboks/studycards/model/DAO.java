@@ -7,4 +7,5 @@ public interface DAO<T>
 {
     public void save(T t);
     public T getById(int id);
+    public T getById(int id, boolean joins);
 }
