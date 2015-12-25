@@ -3,3 +3,4 @@ build
 studycards.iml
 .idea
 derby.log
+target

@@ -38,6 +38,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>9.4.1207.jre7</version>
         </dependency>
         <dependency>
             <groupId>javax.transaction</groupId>
@@ -80,6 +81,11 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/res</directory>
+            </resource>
+        </resources>
     </build>
 
     <properties>
