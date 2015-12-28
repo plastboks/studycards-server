@@ -22,7 +22,7 @@
         <property name="current_session_context_class">thread</property>
 
         <!-- Auto create or update tables -->
-        <property name="hbm2ddl.auto">update</property>
+        <property name="hbm2ddl.auto">create</property>
 
         <!-- Mapping resource configuration files -->
         <mapping class="net.plastboks.studycards.model.type.Student"/>

@@ -3,11 +3,11 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>net.plastboks</groupId>
-    <artifactId>studycards</artifactId>
+    <groupId>net.plastboks.studycards</groupId>
+    <artifactId>server</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>studycards</name>
+    <name>studycards-server</name>
 
     <dependencyManagement>
         <dependencies>
@@ -77,7 +77,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.example.Main</mainClass>
+                    <mainClass>net.plastboks.studycards.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
