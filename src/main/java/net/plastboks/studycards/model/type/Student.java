@@ -50,6 +50,7 @@ public class Student implements Serializable
     {
         this.email = email;
         //this.password = BCrypt.hashpw(password, BCrypt.gensalt());
+        this.password = password; // temporary
 
         // create default group
         Set<Colloquium> defaultColloquia = new LinkedHashSet<>();
