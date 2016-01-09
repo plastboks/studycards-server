@@ -1,31 +1,27 @@
 package net.plastboks.studycards;
 
-import org.glassfish.grizzly.http.server.HttpServer;
-import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
-import org.glassfish.jersey.server.ResourceConfig;
-
-import java.io.IOException;
-import java.net.URI;
+import net.plastboks.studycards.dao.DAO;
+import net.plastboks.studycards.entity.Student;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * Created by alex on 12/16/15.
  */
+//@SpringBootApplication
 public class App
 {
-    public static final String BASE_URI = "http://localhost:8080/myapp/";
-
-    public static HttpServer startServer()
+    public static void main(String ... args)
     {
-        final ResourceConfig rc = new ResourceConfig().packages("net.plastboks.studycards");
-        return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
-    }
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+        ctx.register(AppConfig.class);
+        ctx.refresh();
 
-    public static void main(String ... args) throws IOException
-    {
-        final HttpServer server = startServer();
-        System.out.println(String.format("Jersey app started with WADL available at "
-                + "%sapplication.wadl\nHit enter to stop it...", BASE_URI));
-        System.in.read();
-        server.stop();
+
+        DAO<Student> studentDAO = ctx.getBean(DAO.class);
+
+        studentDAO.save(new Student("ompa", "lompa"));
+
+        //SpringApplication.run(App.class, args);
+
     }
 }

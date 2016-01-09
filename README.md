@@ -1,8 +1,6 @@
-## Maven
-* `mvn clean test`
-* `mvn exec:java`
+## Gradle
+* `gradle bootRun`
 
 ## Resources
 
-* https://jersey.java.net/documentation/latest/getting-started.html
-* https://github.com/jersey/jersey/tree/2.22.1/examples/json-jackson
+* http://www.concretepage.com/spring-4/spring-4-hibernate-4-gradle-integration-example-using-annotation

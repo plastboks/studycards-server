@@ -25,12 +25,12 @@
         <property name="hbm2ddl.auto">create</property>
 
         <!-- Mapping resource configuration files -->
-        <mapping class="net.plastboks.studycards.model.type.Student"/>
-        <mapping class="net.plastboks.studycards.model.type.ApiKey"/>
-        <mapping class="net.plastboks.studycards.model.type.Deck"/>
-        <mapping class="net.plastboks.studycards.model.type.Colloquium"/>
-        <mapping class="net.plastboks.studycards.model.type.Question"/>
-        <mapping class="net.plastboks.studycards.model.type.Play"/>
+        <mapping class="net.plastboks.studycards.entity.Student"/>
+        <mapping class="net.plastboks.studycards.entity.ApiKey"/>
+        <mapping class="net.plastboks.studycards.entity.Deck"/>
+        <mapping class="net.plastboks.studycards.entity.Colloquium"/>
+        <mapping class="net.plastboks.studycards.entity.Play"/>
+        <mapping class="net.plastboks.studycards.entity.Question"/>
 
     </session-factory>
 </hibernate-configuration>

@@ -1,4 +1,4 @@
-package net.plastboks.studycards.model.type;
+package net.plastboks.studycards.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
