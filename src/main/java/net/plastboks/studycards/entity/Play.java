@@ -16,7 +16,7 @@ public class Play
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="pid", unique = true, nullable = false)
-    private Long id;
+    private Integer id;
 
     @CreationTimestamp
     private Date created;
@@ -26,7 +26,7 @@ public class Play
 
     private Play() {}
 
-    public Long getId()
+    public Integer getId()
     {
         return id;
     }

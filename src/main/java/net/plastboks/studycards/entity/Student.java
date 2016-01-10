@@ -1,5 +1,6 @@
 package net.plastboks.studycards.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.*;
 
 import javax.persistence.*;
@@ -59,6 +60,11 @@ public class Student implements Serializable
     }
 
     private Student() {}
+
+    public Integer getId()
+    {
+        return id;
+    }
 
     public String getEmail()
     {

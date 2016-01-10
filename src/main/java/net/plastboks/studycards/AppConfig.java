@@ -1,26 +1,19 @@
 package net.plastboks.studycards;
 
-import net.plastboks.studycards.dao.DAO;
-import net.plastboks.studycards.dao.StudentDAO;
-import net.plastboks.studycards.entity.*;
-import org.hibernate.SessionFactory;
 import org.hibernate.ejb.HibernatePersistence;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.context.annotation.Bean;
 import org.apache.commons.dbcp.BasicDataSource;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
-import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -28,57 +21,42 @@ import java.util.Properties;
  * Created by alex on 1/9/16.
  */
 @Configuration
+@PropertySource("classpath:application.properties")
 @EnableTransactionManagement
 @EnableJpaRepositories
 public class AppConfig
 {
-    @Bean
-    public DAO<Student> studentDAO()
-    {
-        return new StudentDAO();
-    }
+    private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
+    private static final String PROPERTY_NAME_DATABASE_PASSWORD = "db.password";
+    private static final String PROPERTY_NAME_DATABASE_URL = "db.url";
+    private static final String PROPERTY_NAME_DATABASE_USERNAME = "db.username";
 
-    @Bean
-    public HibernateTemplate hibernateTemplate()
-    {
-        return new HibernateTemplate(sessionFactory());
-    }
+    private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
+    private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 
-    @Bean
-    public SessionFactory sessionFactory()
-    {
-        return new LocalSessionFactoryBuilder(getDataSource())
-                .addAnnotatedClass(Student.class)
-                .addAnnotatedClass(Colloquium.class)
-                .addAnnotatedClass(ApiKey.class)
-                .addAnnotatedClass(Deck.class)
-                .addAnnotatedClass(Play.class)
-                .addAnnotatedClass(Question.class)
-                .buildSessionFactory();
-    }
+    private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
+    private static final String PROPERTY_NAME_SERVER_PORT = "server.port";
+
+    @Resource
+    private Environment env;
 
     @Bean
     public DataSource getDataSource()
     {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/studycards_test");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("abcd");
+        dataSource.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
+        dataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
+        dataSource.setUsername(env.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
+        dataSource.setPassword(env.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
         return dataSource;
     }
 
-    @Bean
-    public HibernateTransactionManager hibernateTransactionManager()
-    {
-        return new HibernateTransactionManager(sessionFactory());
-    }
 
     @Bean
     public EmbeddedServletContainerFactory servletContainer()
     {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
-        factory.setPort(8080);
+        factory.setPort(Integer.parseInt(env.getRequiredProperty(PROPERTY_NAME_SERVER_PORT)));
         return factory;
     }
 
@@ -87,7 +65,8 @@ public class AppConfig
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(getDataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
-        entityManagerFactoryBean.setPackagesToScan("net.plastboks.studycards.entity");
+        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN));
+
 
         entityManagerFactoryBean.setJpaProperties(hibProperties());
 
@@ -96,8 +75,8 @@ public class AppConfig
 
     private Properties hibProperties() {
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        properties.put("hibernate.show_sql", "true");
+        properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,	env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
+        properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
         return properties;
     }
 
@@ -109,5 +88,4 @@ public class AppConfig
         transactionManager.setEntityManagerFactory(entityManagerFactory().getObject());
         return transactionManager;
     }
-
 }
