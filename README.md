@@ -1,3 +1,5 @@
+# Studycards - Server
+
 ## Gradle
 * `gradle bootRun`
 
