@@ -51,7 +51,6 @@ public class AppConfig
         return dataSource;
     }
 
-
     @Bean
     public EmbeddedServletContainerFactory servletContainer()
     {
@@ -67,7 +66,6 @@ public class AppConfig
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
         entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN));
 
-
         entityManagerFactoryBean.setJpaProperties(hibProperties());
 
         return entityManagerFactoryBean;
@@ -79,7 +77,6 @@ public class AppConfig
         properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
         return properties;
     }
-
 
     @Bean
     public JpaTransactionManager transactionManager()
