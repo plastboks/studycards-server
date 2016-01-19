@@ -2,6 +2,7 @@ package net.plastboks.studycards.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.*;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 import javax.persistence.CascadeType;
@@ -47,19 +48,9 @@ public class Student implements Serializable
             inverseJoinColumns = { @JoinColumn(name = "gid") })
     private Set<Colloquium> colloquia;
 
-    public Student(String email, String password)
+    private Student()
     {
-        this.email = email;
-        //this.password = BCrypt.hashpw(password, BCrypt.gensalt());
-        this.password = password; // temporary
-
-        // create default group
-        Set<Colloquium> defaultColloquia = new LinkedHashSet<>();
-        defaultColloquia.add(new Colloquium(email));
-        setColloquia(defaultColloquia);
     }
-
-    private Student() {}
 
     public Integer getId()
     {
@@ -88,12 +79,16 @@ public class Student implements Serializable
 
     public void setPassword(String password)
     {
-        this.password = password;
+        this.password = BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     public void setEmail(String email)
     {
         this.email = email;
+        // create default group
+        Set<Colloquium> defaultColloquia = new LinkedHashSet<>();
+        defaultColloquia.add(new Colloquium(email));
+        setColloquia(defaultColloquia);
     }
 
     public void setId(Integer id)
