@@ -26,17 +26,17 @@ import java.util.Properties;
 @EnableJpaRepositories
 public class AppConfig
 {
-    private static final String PROPERTY_NAME_DATABASE_DRIVER = "db.driver";
-    private static final String PROPERTY_NAME_DATABASE_PASSWORD = "db.password";
-    private static final String PROPERTY_NAME_DATABASE_URL = "db.url";
-    private static final String PROPERTY_NAME_DATABASE_USERNAME = "db.username";
+    private static final String DATABASE_DRIVER = "db.driver";
+    private static final String DATABASE_PASSWORD = "db.password";
+    private static final String DATABASE_URL = "db.url";
+    private static final String DATABASE_USERNAME = "db.username";
 
-    private static final String PROPERTY_NAME_HIBERNATE_DIALECT = "hibernate.dialect";
-    private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
-    private static final String PROPERTY_NAME_HIBERNATE_DDL = "hibernate.hbm2ddl.auto";
+    private static final String HIBERNATE_DIALECT = "hibernate.dialect";
+    private static final String HIBERNATE_SHOW_SQL = "hibernate.show_sql";
+    private static final String HIBERNATE_DDL = "hibernate.hbm2ddl.auto";
 
-    private static final String PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
-    private static final String PROPERTY_NAME_SERVER_PORT = "server.port";
+    private static final String ENTITYMANAGER_PACKAGES_TO_SCAN = "entitymanager.packages.to.scan";
+    private static final String SERVER_PORT = "server.port";
 
     @Resource
     private Environment env;
@@ -45,10 +45,10 @@ public class AppConfig
     public DataSource getDataSource()
     {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(env.getRequiredProperty(PROPERTY_NAME_DATABASE_DRIVER));
-        dataSource.setUrl(env.getRequiredProperty(PROPERTY_NAME_DATABASE_URL));
-        dataSource.setUsername(env.getRequiredProperty(PROPERTY_NAME_DATABASE_USERNAME));
-        dataSource.setPassword(env.getRequiredProperty(PROPERTY_NAME_DATABASE_PASSWORD));
+        dataSource.setDriverClassName(env.getRequiredProperty(DATABASE_DRIVER));
+        dataSource.setUrl(env.getRequiredProperty(DATABASE_URL));
+        dataSource.setUsername(env.getRequiredProperty(DATABASE_USERNAME));
+        dataSource.setPassword(env.getRequiredProperty(DATABASE_PASSWORD));
         return dataSource;
     }
 
@@ -56,7 +56,7 @@ public class AppConfig
     public EmbeddedServletContainerFactory servletContainer()
     {
         TomcatEmbeddedServletContainerFactory factory = new TomcatEmbeddedServletContainerFactory();
-        factory.setPort(Integer.parseInt(env.getRequiredProperty(PROPERTY_NAME_SERVER_PORT)));
+        factory.setPort(Integer.parseInt(env.getRequiredProperty(SERVER_PORT)));
         return factory;
     }
 
@@ -65,7 +65,7 @@ public class AppConfig
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(getDataSource());
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistence.class);
-        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN));
+        entityManagerFactoryBean.setPackagesToScan(env.getRequiredProperty(ENTITYMANAGER_PACKAGES_TO_SCAN));
 
         entityManagerFactoryBean.setJpaProperties(hibProperties());
 
@@ -74,9 +74,9 @@ public class AppConfig
 
     private Properties hibProperties() {
         Properties properties = new Properties();
-        properties.put(PROPERTY_NAME_HIBERNATE_DIALECT,	env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DIALECT));
-        properties.put(PROPERTY_NAME_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_SHOW_SQL));
-        properties.put(PROPERTY_NAME_HIBERNATE_DDL, env.getRequiredProperty(PROPERTY_NAME_HIBERNATE_DDL));
+        properties.put(HIBERNATE_DIALECT, env.getRequiredProperty(HIBERNATE_DIALECT));
+        properties.put(HIBERNATE_SHOW_SQL, env.getRequiredProperty(HIBERNATE_SHOW_SQL));
+        properties.put(HIBERNATE_DDL, env.getRequiredProperty(HIBERNATE_DDL));
         return properties;
     }
 
