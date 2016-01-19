@@ -4,6 +4,7 @@ import net.plastboks.studycards.entity.Student;
 import net.plastboks.studycards.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,13 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/student")
 public class StudentController
 {
-    //@Autowired
-    //private StudentService studentService;
+    @Autowired
+    private StudentService studentService;
 
+    @RequestMapping(method = RequestMethod.GET)
     public Student get(@RequestParam(value = "id") int id)
     {
-        //Student s = studentService.findById(id);
+        Student s = studentService.findById(id);
 
-        return new Student("ping", "pong");
+        return s;
     }
 }

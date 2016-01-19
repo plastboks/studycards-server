@@ -12,10 +12,6 @@ public class App
 {
     public static void main(String ... args)
     {
-        //AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
-        //ctx.register(AppConfig.class);
-        //ctx.refresh();
-
         SpringApplication.run(App.class, args);
     }
 }

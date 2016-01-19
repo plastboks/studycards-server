@@ -27,7 +27,7 @@ public class Student implements Serializable
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "passwd", unique = true, nullable = false)
+    @Column(name = "password", unique = false, nullable = false)
     private String password;
 
     @CreationTimestamp
@@ -84,6 +84,21 @@ public class Student implements Serializable
     public Set<ApiKey> getKeys()
     {
         return keys;
+    }
+
+    public void setPassword(String password)
+    {
+        this.password = password;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
+    public void setId(Integer id)
+    {
+        this.id = id;
     }
 
     public void setKeys(Set<ApiKey> keys)

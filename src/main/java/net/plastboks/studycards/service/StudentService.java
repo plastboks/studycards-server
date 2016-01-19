@@ -4,7 +4,6 @@ import javassist.NotFoundException;
 import net.plastboks.studycards.entity.Student;
 import net.plastboks.studycards.repository.StudentRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -19,7 +18,6 @@ public class StudentService implements IService<Student>
     private StudentRepository studentRepository;
 
     @Override
-    @Transactional
     public Student create(Student student)
     {
         Student s = student;
@@ -27,7 +25,6 @@ public class StudentService implements IService<Student>
     }
 
     @Override
-    @Transactional
     public Student delete(int id) throws NotFoundException
     {
         Student s = studentRepository.findOne(id);
@@ -40,14 +37,12 @@ public class StudentService implements IService<Student>
     }
 
     @Override
-    @Transactional
     public List<Student> findAll()
     {
         return studentRepository.findAll();
     }
 
     @Override
-    @Transactional
     public Student update(Student student) throws NotFoundException
     {
         Student s = studentRepository.findOne(student.getId());
@@ -60,7 +55,6 @@ public class StudentService implements IService<Student>
     }
 
     @Override
-    @Transactional
     public Student findById(int id)
     {
         return studentRepository.findOne(id);
