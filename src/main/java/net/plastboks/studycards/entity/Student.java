@@ -22,7 +22,7 @@ public class Student implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="sid", unique = true, nullable = false)
+    @Column(name="id", unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "email", unique = true, nullable = false)
@@ -44,8 +44,8 @@ public class Student implements Serializable
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_colloquium", joinColumns =
-            { @JoinColumn(name = "uid", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "gid") })
+            { @JoinColumn(name = "student_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "colloquium_id") })
     private Set<Colloquium> colloquia;
 
     private Student()

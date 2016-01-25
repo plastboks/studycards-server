@@ -12,15 +12,15 @@ import java.util.Set;
  * Created by alex on 12/18/15.
  */
 @Entity
-@Table(name = "question")
-public class Question implements Serializable
+@Table(name = "card")
+public class Card implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="qid", unique = true, nullable = false)
+    @Column(name="id", unique = true, nullable = false)
     private Integer id;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "questions")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "cards")
     private Set<Deck> decks;
 
     @Column(name = "question", unique = false, nullable = false)
@@ -35,13 +35,13 @@ public class Question implements Serializable
     @UpdateTimestamp
     private Date updated;
 
-    public Question(String question, String answer)
+    public Card(String question, String answer)
     {
         this.question = question;
         this.answer = answer;
     }
 
-    private Question() {}
+    private Card() {}
 
     public Integer getId()
     {

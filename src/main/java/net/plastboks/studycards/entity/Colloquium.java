@@ -18,7 +18,7 @@ public class Colloquium implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="cid", unique = true, nullable = false)
+    @Column(name="id", unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "name", unique = false, nullable = false)
@@ -35,8 +35,8 @@ public class Colloquium implements Serializable
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "colloquium_deck", joinColumns =
-            { @JoinColumn(name = "cid", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "did") })
+            { @JoinColumn(name = "colloquium_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "deck_id") })
     private Set<Deck> decks = new LinkedHashSet<>(0);
 
     public Colloquium(String name)

@@ -1,7 +1,7 @@
 package net.plastboks.studycards.controller;
 
-import net.plastboks.studycards.entity.Question;
-import net.plastboks.studycards.service.QuestionService;
+import net.plastboks.studycards.entity.Card;
+import net.plastboks.studycards.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by alex on 1/10/16.
  */
 @RestController
-@RequestMapping(value = "question")
-public class QuestionController
+@RequestMapping(value = "card")
+public class CardController
 {
     @Autowired
-    private QuestionService questionService;
+    private CardService cardService;
 
-    public Question get(@RequestParam(value = "id") int id)
+    public Card get(@RequestParam(value = "id") int id)
     {
-        Question q = questionService.findById(id);
+        Card q = cardService.findById(id);
 
         return q;
     }

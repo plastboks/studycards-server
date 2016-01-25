@@ -30,7 +30,7 @@
         <mapping class="net.plastboks.studycards.entity.Deck"/>
         <mapping class="net.plastboks.studycards.entity.Colloquium"/>
         <mapping class="net.plastboks.studycards.entity.Play"/>
-        <mapping class="net.plastboks.studycards.entity.Question"/>
+        <mapping class="net.plastboks.studycards.entity.Card"/>
 
     </session-factory>
 </hibernate-configuration>

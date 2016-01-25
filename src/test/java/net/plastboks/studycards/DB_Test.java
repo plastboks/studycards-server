@@ -3,7 +3,6 @@ package net.plastboks.studycards;
 import net.plastboks.studycards.entity.*;
 import net.plastboks.studycards.dao.StudentDAO;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -36,20 +35,20 @@ public class DB_Test
         Set<Deck> decks = new HashSet<>();
 
         Deck deck1 = new Deck("Physics");
-        Set<Question> questions1 = new HashSet<>();
-        questions1.add(new Question("Physics - Question1", "Answer1"));
-        questions1.add(new Question("Physics - Question2", "Answer1"));
-        questions1.add(new Question("Physics - Question3", "Answer1"));
-        questions1.add(new Question("Physics - Question4", "Answer1"));
-        deck1.setQuestions(questions1);
+        Set<Card> questions1 = new HashSet<>();
+        questions1.add(new Card("Physics - Question1", "Answer1"));
+        questions1.add(new Card("Physics - Question2", "Answer1"));
+        questions1.add(new Card("Physics - Question3", "Answer1"));
+        questions1.add(new Card("Physics - Question4", "Answer1"));
+        deck1.setCards(questions1);
 
         Deck deck2 = new Deck("Maths");
-        Set<Question> questions2 = new HashSet<>();
-        questions2.add(new Question("Math - Question1", "Answer1"));
-        questions2.add(new Question("Math - Question2", "Answer1"));
-        questions2.add(new Question("Math - Question3", "Answer1"));
-        questions2.add(new Question("Math - Question4", "Answer1"));
-        deck2.setQuestions(questions2);
+        Set<Card> questions2 = new HashSet<>();
+        questions2.add(new Card("Math - Question1", "Answer1"));
+        questions2.add(new Card("Math - Question2", "Answer1"));
+        questions2.add(new Card("Math - Question3", "Answer1"));
+        questions2.add(new Card("Math - Question4", "Answer1"));
+        deck2.setCards(questions2);
 
         decks.add(deck1);
         decks.add(deck2);

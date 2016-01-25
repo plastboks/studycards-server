@@ -17,7 +17,7 @@ public class Deck implements Serializable
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="did", unique = true, nullable = false)
+    @Column(name="id", unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "name", unique = false, nullable = false)
@@ -33,10 +33,10 @@ public class Deck implements Serializable
     private Set<Colloquium> colloquia;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "deck_question", joinColumns =
-            { @JoinColumn(name = "did", nullable = false, updatable = false) },
-            inverseJoinColumns = { @JoinColumn(name = "qid") })
-    private Set<Question> questions;
+    @JoinTable(name = "deck_card", joinColumns =
+            { @JoinColumn(name = "deck_id", nullable = false, updatable = false) },
+            inverseJoinColumns = { @JoinColumn(name = "card_id") })
+    private Set<Card> cards;
 
     public Deck(String name)
     {
@@ -75,13 +75,13 @@ public class Deck implements Serializable
         this.colloquia = colloquia;
     }
 
-    public Set<Question> getQuestions()
+    public Set<Card> getCards()
     {
-        return questions;
+        return cards;
     }
 
-    public void setQuestions(Set<Question> questions)
+    public void setCards(Set<Card> cards)
     {
-        this.questions = questions;
+        this.cards = cards;
     }
 }

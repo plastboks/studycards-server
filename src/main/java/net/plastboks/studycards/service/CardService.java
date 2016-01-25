@@ -1,7 +1,7 @@
 package net.plastboks.studycards.service;
 
 import javassist.NotFoundException;
-import net.plastboks.studycards.entity.Question;
+import net.plastboks.studycards.entity.Card;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -11,37 +11,37 @@ import java.util.List;
  * Created by alex on 1/10/16.
  */
 @Service
-public class QuestionService implements IService<Question>
+public class CardService implements IService<Card>
 {
     @Resource
-    private QuestionService questionService;
+    private CardService cardService;
 
     @Override
-    public Question create(Question question)
+    public Card create(Card card)
     {
         return null;
     }
 
     @Override
-    public Question delete(int id) throws NotFoundException
+    public Card delete(int id) throws NotFoundException
     {
         return null;
     }
 
     @Override
-    public List<Question> findAll()
+    public List<Card> findAll()
     {
         return null;
     }
 
     @Override
-    public Question update(Question question) throws NotFoundException
+    public Card update(Card card) throws NotFoundException
     {
         return null;
     }
 
     @Override
-    public Question findById(int id)
+    public Card findById(int id)
     {
         return null;
     }
