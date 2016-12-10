@@ -54,10 +54,12 @@ dependencies {
     compile("org.hibernate:hibernate-entitymanager:5.0.5.Final")
     compile("org.postgresql:postgresql")
     compile("org.xerial:sqlite-jdbc:3.8.11.2")
+    compile("com.h2database:h2")
     compile("javax.transaction:jta:1.1")
     compile("commons-dbcp:commons-dbcp:1.4")
 
     testCompile("junit:junit")
+    testCompile("org.mockito:mockito-core")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 
