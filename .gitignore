@@ -4,3 +4,6 @@ studycards.iml
 .idea
 derby.log
 target
+gradle/
+gradlew
+gradlew.bat
