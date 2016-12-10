@@ -1,7 +1,11 @@
 # Studycards - Server
 
 ## Gradle
+* `gradle build`
 * `gradle bootRun`
+
+## Swagger
+Access it through `/v2/api-docs` and `/swagger-ui.html`
 
 ## Resources
 
