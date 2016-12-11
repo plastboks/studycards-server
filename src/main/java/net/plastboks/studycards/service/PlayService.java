@@ -18,9 +18,9 @@ public class PlayService implements IService<Play>
     private PlayRepository playRepository;
 
     @Override
-    public Play create(Play play)
+    public Play save(Play play)
     {
-        return null;
+        return playRepository.save(play);
     }
 
     @Override
@@ -32,18 +32,12 @@ public class PlayService implements IService<Play>
     @Override
     public List<Play> findAll()
     {
-        return null;
+        return playRepository.findAll();
     }
 
     @Override
-    public Play update(Play play) throws NotFoundException
+    public Play findOne(int id)
     {
-        return null;
-    }
-
-    @Override
-    public Play findById(int id)
-    {
-        return null;
+        return playRepository.findOne(id);
     }
 }

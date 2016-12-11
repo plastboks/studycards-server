@@ -1,6 +1,5 @@
 package net.plastboks.studycards.service;
 
-import javassist.NotFoundException;
 import net.plastboks.studycards.entity.Student;
 import net.plastboks.studycards.repository.StudentRepository;
 import org.springframework.stereotype.Service;
@@ -18,18 +17,15 @@ public class StudentService implements IService<Student>
     private StudentRepository studentRepository;
 
     @Override
-    public Student create(Student student)
+    public Student save(Student student)
     {
-        Student s = student;
-        return studentRepository.save(s);
+        return studentRepository.save(student);
     }
 
     @Override
-    public Student delete(int id) throws NotFoundException
+    public Student delete(int id)
     {
         Student s = studentRepository.findOne(id);
-
-        if (s == null) throw new NotFoundException("Student not found");
 
         studentRepository.delete(s);
 
@@ -43,19 +39,7 @@ public class StudentService implements IService<Student>
     }
 
     @Override
-    public Student update(Student student) throws NotFoundException
-    {
-        Student s = studentRepository.findOne(student.getId());
-
-        if (s == null) throw new NotFoundException("Student not found");
-
-        // UPDATE 's' HERE!
-
-        return s;
-    }
-
-    @Override
-    public Student findById(int id)
+    public Student findOne(int id)
     {
         return studentRepository.findOne(id);
     }

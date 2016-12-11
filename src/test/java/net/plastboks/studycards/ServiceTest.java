@@ -1,12 +1,13 @@
 package net.plastboks.studycards;
 
 import net.plastboks.studycards.entity.*;
-import net.plastboks.studycards.repository.ColloquiumRepository;
-import net.plastboks.studycards.repository.StudentRepository;
 import net.plastboks.studycards.service.ColloquiumService;
 import net.plastboks.studycards.service.DeckService;
 import net.plastboks.studycards.service.StudentService;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,8 +17,13 @@ import static org.mockito.Mockito.*;
 /**
  * Created by alex on 12/17/15.
  */
+@RunWith(MockitoJUnitRunner.class)
 public class ServiceTest
 {
+    @Mock StudentService studentService;
+    @Mock ColloquiumService colloquiumService;
+    @Mock DeckService deckService;
+
     @Test
     public void deckTest()
     {
@@ -42,14 +48,12 @@ public class ServiceTest
         decks.add(deck1);
         decks.add(deck2);
 
-        DeckService mockDecksService = mock(DeckService.class);
-        decks.forEach(mockDecksService::create);
+        decks.forEach(deckService::save);
 
         Colloquium col1 = new Colloquium("Colloquium 1");
         col1.setDecks(decks);
 
-        ColloquiumService mockCollRepository = mock(ColloquiumService.class);
-        mockCollRepository.create(col1);
+        colloquiumService.save(col1);
     }
 
     @Test
@@ -67,7 +71,6 @@ public class ServiceTest
 
         student.setKeys(keys);
 
-        StudentService mockStudentService = mock(StudentService.class);
-        mockStudentService.create(student);
+        when(studentService.save(student)).thenReturn(student);
     }
 }

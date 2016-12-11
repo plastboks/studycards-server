@@ -2,6 +2,7 @@ package net.plastboks.studycards.service;
 
 import javassist.NotFoundException;
 import net.plastboks.studycards.entity.Card;
+import net.plastboks.studycards.repository.CardRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,12 +15,12 @@ import java.util.List;
 public class CardService implements IService<Card>
 {
     @Resource
-    private CardService cardService;
+    private CardRepository cardRepository;
 
     @Override
-    public Card create(Card card)
+    public Card save(Card card)
     {
-        return null;
+        return cardRepository.save(card);
     }
 
     @Override
@@ -31,18 +32,12 @@ public class CardService implements IService<Card>
     @Override
     public List<Card> findAll()
     {
-        return null;
+        return cardRepository.findAll();
     }
 
     @Override
-    public Card update(Card card) throws NotFoundException
+    public Card findOne(int id)
     {
-        return null;
-    }
-
-    @Override
-    public Card findById(int id)
-    {
-        return null;
+        return cardRepository.findOne(id);
     }
 }

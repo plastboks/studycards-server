@@ -21,7 +21,7 @@
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
 
-        <!-- Auto create or update tables -->
+        <!-- Auto save or update tables -->
         <property name="hbm2ddl.auto">create</property>
 
         <!-- Mapping resource configuration files -->

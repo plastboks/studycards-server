@@ -1,13 +1,11 @@
 package net.plastboks.studycards.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -88,7 +86,7 @@ public class Student implements Serializable
     public void setEmail(String email)
     {
         this.email = email;
-        // create default group
+        // save default group
         Set<Colloquium> defaultColloquia = new LinkedHashSet<>();
         defaultColloquia.add(new Colloquium(email));
         setColloquia(defaultColloquia);

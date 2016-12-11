@@ -18,9 +18,9 @@ public class ApiKeyService implements IService<ApiKey>
     private ApiKeyRepository apiKeyRepository;
 
     @Override
-    public ApiKey create(ApiKey apiKey)
+    public ApiKey save(ApiKey apiKey)
     {
-        return null;
+        return apiKeyRepository.save(apiKey);
     }
 
     @Override
@@ -32,18 +32,12 @@ public class ApiKeyService implements IService<ApiKey>
     @Override
     public List<ApiKey> findAll()
     {
-        return null;
+        return apiKeyRepository.findAll();
     }
 
     @Override
-    public ApiKey update(ApiKey apiKey) throws NotFoundException
+    public ApiKey findOne(int id)
     {
-        return null;
-    }
-
-    @Override
-    public ApiKey findById(int id)
-    {
-        return null;
+        return apiKeyRepository.findOne(id);
     }
 }

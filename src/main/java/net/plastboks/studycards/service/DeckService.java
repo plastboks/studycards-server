@@ -18,9 +18,9 @@ public class DeckService implements IService<Deck>
     private DeckRepository deckRepository;
 
     @Override
-    public Deck create(Deck deck)
+    public Deck save(Deck deck)
     {
-        return null;
+        return deckRepository.save(deck);
     }
 
     @Override
@@ -32,18 +32,12 @@ public class DeckService implements IService<Deck>
     @Override
     public List<Deck> findAll()
     {
-        return null;
+        return deckRepository.findAll();
     }
 
     @Override
-    public Deck update(Deck deck) throws NotFoundException
+    public Deck findOne(int id)
     {
-        return null;
-    }
-
-    @Override
-    public Deck findById(int id)
-    {
-        return null;
+        return deckRepository.findOne(id);
     }
 }

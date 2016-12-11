@@ -9,9 +9,8 @@ import java.util.List;
  */
 public interface IService<T>
 {
-    public T create(T t);
-    public T delete(int id) throws NotFoundException;
-    public List<T> findAll();
-    public T update(T t) throws NotFoundException;
-    public T findById(int id);
+    T save(T t);
+    T delete(int id) throws NotFoundException;
+    List<T> findAll();
+    T findOne(int id);
 }

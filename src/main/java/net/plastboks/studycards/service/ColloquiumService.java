@@ -2,6 +2,7 @@ package net.plastboks.studycards.service;
 
 import javassist.NotFoundException;
 import net.plastboks.studycards.entity.Colloquium;
+import net.plastboks.studycards.repository.ColloquiumRepository;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,12 +15,12 @@ import java.util.List;
 public class ColloquiumService implements IService<Colloquium>
 {
     @Resource
-    private ColloquiumService colloquiumService;
+    private ColloquiumRepository colloquiumRepository;
 
     @Override
-    public Colloquium create(Colloquium colloquium)
+    public Colloquium save(Colloquium colloquium)
     {
-        return null;
+        return colloquiumRepository.save(colloquium);
     }
 
     @Override
@@ -31,18 +32,12 @@ public class ColloquiumService implements IService<Colloquium>
     @Override
     public List<Colloquium> findAll()
     {
-        return null;
+        return colloquiumRepository.findAll();
     }
 
     @Override
-    public Colloquium update(Colloquium colloquium) throws NotFoundException
+    public Colloquium findOne(int id)
     {
-        return null;
-    }
-
-    @Override
-    public Colloquium findById(int id)
-    {
-        return null;
+        return colloquiumRepository.findOne(id);
     }
 }
