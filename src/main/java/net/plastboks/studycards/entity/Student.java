@@ -48,8 +48,11 @@ public class Student implements Serializable
             inverseJoinColumns = { @JoinColumn(name = "colloquium_id") })
     private Set<Colloquium> colloquia;
 
-    private Student()
+    private Student() {}
+
+    public Student(String email)
     {
+        this.email = email;
     }
 
     public Integer getId()

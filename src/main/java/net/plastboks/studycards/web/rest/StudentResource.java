@@ -1,4 +1,4 @@
-package net.plastboks.studycards.controller;
+package net.plastboks.studycards.web.rest;
 
 import net.plastboks.studycards.entity.Student;
 import net.plastboks.studycards.service.StudentService;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/student")
-public class StudentController
+public class StudentResource
 {
     @Autowired
     private StudentService studentService;

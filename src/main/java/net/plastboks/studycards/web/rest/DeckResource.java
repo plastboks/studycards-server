@@ -1,4 +1,4 @@
-package net.plastboks.studycards.controller;
+package net.plastboks.studycards.web.rest;
 
 import net.plastboks.studycards.entity.Deck;
 import net.plastboks.studycards.service.DeckService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/deck")
-public class DeckController
+public class DeckResource
 {
     @Autowired
     private DeckService deckService;

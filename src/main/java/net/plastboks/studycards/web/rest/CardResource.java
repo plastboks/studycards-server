@@ -1,4 +1,4 @@
-package net.plastboks.studycards.controller;
+package net.plastboks.studycards.web.rest;
 
 import net.plastboks.studycards.entity.Card;
 import net.plastboks.studycards.service.CardService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "card")
-public class CardController
+public class CardResource
 {
     @Autowired
     private CardService cardService;

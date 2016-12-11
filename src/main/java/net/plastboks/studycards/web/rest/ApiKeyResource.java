@@ -1,4 +1,4 @@
-package net.plastboks.studycards.controller;
+package net.plastboks.studycards.web.rest;
 
 import net.plastboks.studycards.entity.ApiKey;
 import net.plastboks.studycards.service.ApiKeyService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/apikey")
-public class ApiKeyController
+public class ApiKeyResource
 {
     @Autowired
     private ApiKeyService apiKeyService;

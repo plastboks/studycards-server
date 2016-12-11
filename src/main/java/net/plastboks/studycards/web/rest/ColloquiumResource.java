@@ -1,4 +1,4 @@
-package net.plastboks.studycards.controller;
+package net.plastboks.studycards.web.rest;
 
 import net.plastboks.studycards.entity.Colloquium;
 import net.plastboks.studycards.service.ColloquiumService;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/colloquium")
-public class ColloquiumController
+public class ColloquiumResource
 {
     @Autowired
     private ColloquiumService colloquiumService;

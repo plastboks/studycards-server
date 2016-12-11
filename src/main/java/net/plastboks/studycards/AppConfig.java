@@ -102,7 +102,7 @@ public class AppConfig
     }
 
     @Bean
-    public Docket apidocs() {
+    public Docket apiDocs() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
