@@ -1,5 +1,6 @@
 package net.plastboks.studycards.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -26,7 +27,8 @@ public class Student implements Serializable
     @Column(name = "email", unique = true, nullable = false)
     private String email;
 
-    @Column(name = "password", unique = false, nullable = false)
+    @JsonIgnore
+    @Column(name = "password" , nullable = false)
     private String password;
 
     @CreationTimestamp
@@ -35,11 +37,13 @@ public class Student implements Serializable
     @UpdateTimestamp
     private Date updated;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "student")
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private Set<ApiKey> keys;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "student_colloquium", joinColumns =
             { @JoinColumn(name = "student_id", nullable = false, updatable = false) },

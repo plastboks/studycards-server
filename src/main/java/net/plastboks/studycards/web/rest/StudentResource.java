@@ -3,6 +3,8 @@ package net.plastboks.studycards.web.rest;
 import net.plastboks.studycards.entity.Student;
 import net.plastboks.studycards.service.StudentService;
 import net.plastboks.studycards.web.rest.util.HeaderUtil;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,11 +20,14 @@ import java.util.Optional;
  * Created by alex on 1/9/16.
  */
 @RestController
-@RequestMapping(value = "/api")
-public class StudentResource
+@RequestMapping(value = Constants.API_VERSION, produces = MediaType.APPLICATION_JSON_VALUE)
+public class StudentResource implements IResource<Student>
 {
     @Autowired
     private StudentService studentService;
+
+    private final Logger log = LoggerFactory.getLogger(StudentResource.class);
+    private final String RESOURCE_NAME = "students";
 
     /**
      * POST /students: Create a new student
@@ -31,12 +36,11 @@ public class StudentResource
      * @return the ResponseEntity with status 201 (Created) and with body the new student, or with status 400 (Bad Request) if the student has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/students",
-            method = RequestMethod.POST,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Student> createStudent(@RequestBody Student student)
+    @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.POST)
+    public ResponseEntity<Student> post(@RequestBody Student student)
             throws URISyntaxException
     {
+        log.debug("REST request to save Student : {}", student);
         if (student.getId() != null) {
             return ResponseEntity.badRequest()
                     .headers(HeaderUtil.createFailureAlert("student", "idexists", "A new student cannot already have an ID"))
@@ -49,7 +53,6 @@ public class StudentResource
                 .body(result);
     }
 
-
     /**
      * PUT  /students : Updates an existing student.
      *
@@ -59,12 +62,12 @@ public class StudentResource
      * or with status 500 (Internal Server Error) if the student couldnt be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @RequestMapping(value = "/students",
-            method = RequestMethod.PUT,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Student> updateStudent(@RequestBody Student student) throws URISyntaxException {
+    @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.PUT)
+    public ResponseEntity<Student> put(@RequestBody Student student) throws URISyntaxException
+    {
+        log.debug("REST request to update Student : {}", student);
         if (student.getId() == null) {
-            return createStudent(student);
+            return post(student);
         }
         Student result = studentService.save(student);
         return ResponseEntity.ok()
@@ -77,11 +80,10 @@ public class StudentResource
      *
      * @return the ResponseEntity with status 200 (OK) and the list of students in body
      */
-    @RequestMapping(value = "/students",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Student> getAllStudents()
+    @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.GET)
+    public List<Student> getAll()
     {
+        log.debug("REST request to fetch all students");
         return studentService.findAll();
     }
 
@@ -91,11 +93,11 @@ public class StudentResource
      * @param id the id of the student to retrieve
      * @return the ResponseEntity with status 200 (OK) and the student in body, or 404 (Not found)
      */
-    @RequestMapping(value = "/students/{id}",
-            method = RequestMethod.GET,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Student> getStudent(@PathVariable int id)
+    @RequestMapping(value = RESOURCE_NAME+"/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Student> get(@PathVariable int id)
     {
+        log.debug("REST request to get student: ", id);
+
         Student student = studentService.findOne(id);
 
         return Optional.ofNullable(student)
@@ -111,11 +113,10 @@ public class StudentResource
      * @param id the id of the student to delete
      * @return the ResponseEntity with status 200 (OK)
      */
-    @RequestMapping(value = "/students/{id}",
-            method = RequestMethod.DELETE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> deleteStudent(@PathVariable int id)
+    @RequestMapping(value = RESOURCE_NAME+"{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable int id)
     {
+        log.debug("REST request to delete student: ", id);
         studentService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert("student", String.valueOf(id))).build();
     }

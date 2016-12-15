@@ -3,24 +3,52 @@ package net.plastboks.studycards.web.rest;
 import net.plastboks.studycards.entity.Deck;
 import net.plastboks.studycards.service.DeckService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URISyntaxException;
+import java.util.List;
 
 /**
  * Created by alex on 1/10/16.
  */
 @RestController
-@RequestMapping(value = "/decks")
-public class DeckResource
+@RequestMapping(value = Constants.API_VERSION, produces = MediaType.APPLICATION_JSON_VALUE)
+public class DeckResource implements IResource<Deck>
 {
     @Autowired
     private DeckService deckService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public Deck get(@RequestParam(value = "id") int id)
-    {
-        return deckService.findOne(id);
+    private static final String RESOURCE_NAME = "decks";
+
+    @Override
+    @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.POST)
+    public ResponseEntity<Deck> post(Deck deck) throws URISyntaxException {
+        return null;
+    }
+
+    @Override
+    @RequestMapping(value = RESOURCE_NAME+"/{id}", method = RequestMethod.GET)
+    public ResponseEntity<Deck> get(@PathVariable int id) {
+        return null;
+    }
+
+    @Override
+    @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.PUT)
+    public ResponseEntity<Deck> put(Deck deck) throws URISyntaxException {
+        return null;
+    }
+
+    @Override
+    @RequestMapping(value = RESOURCE_NAME+"{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> delete(@PathVariable int id) {
+        return null;
+    }
+
+    @Override
+    @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.GET)
+    public List<Deck> getAll() {
+        return null;
     }
 }
