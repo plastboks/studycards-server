@@ -66,6 +66,8 @@ dependencies {
         exclude module: 'mapstruct'
     }
 
+    compile "org.mapstruct:mapstruct-jdk8:${mapstruct_version}"
+
     testCompile("junit:junit")
     testCompile("org.mockito:mockito-core")
     testCompile("org.springframework.boot:spring-boot-starter-test")
