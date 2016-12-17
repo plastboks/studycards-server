@@ -1,6 +1,6 @@
 package net.plastboks.studycards.web.rest;
 
-import net.plastboks.studycards.entity.Student;
+import net.plastboks.studycards.domain.User;
 import net.plastboks.studycards.service.StudentService;
 import net.plastboks.studycards.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
@@ -21,7 +21,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping(value = Constants.API_VERSION, produces = MediaType.APPLICATION_JSON_VALUE)
-public class StudentResource implements IResource<Student>
+public class StudentResource implements IResource<User>
 {
     @Autowired
     private StudentService studentService;
@@ -37,7 +37,7 @@ public class StudentResource implements IResource<Student>
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.POST)
-    public ResponseEntity<Student> post(@RequestBody Student student)
+    public ResponseEntity<User> post(@RequestBody User student)
             throws URISyntaxException
     {
         log.debug("REST request to save Student : {}", student);
@@ -47,7 +47,7 @@ public class StudentResource implements IResource<Student>
                     .body(null);
         }
 
-        Student result = studentService.save(student);
+        User result = studentService.save(student);
         return ResponseEntity.created(new URI("/api/students" + student.getId()))
                 .headers(HeaderUtil.createEntityCreationAlert("student", student.getId().toString()))
                 .body(result);
@@ -63,13 +63,13 @@ public class StudentResource implements IResource<Student>
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.PUT)
-    public ResponseEntity<Student> put(@RequestBody Student student) throws URISyntaxException
+    public ResponseEntity<User> put(@RequestBody User student) throws URISyntaxException
     {
         log.debug("REST request to update Student : {}", student);
         if (student.getId() == null) {
             return post(student);
         }
-        Student result = studentService.save(student);
+        User result = studentService.save(student);
         return ResponseEntity.ok()
                 .headers(HeaderUtil.createEntityUpdateAlert("student", student.getId().toString()))
                 .body(result);
@@ -81,7 +81,7 @@ public class StudentResource implements IResource<Student>
      * @return the ResponseEntity with status 200 (OK) and the list of students in body
      */
     @RequestMapping(value = RESOURCE_NAME, method = RequestMethod.GET)
-    public List<Student> getAll()
+    public List<User> getAll()
     {
         log.debug("REST request to fetch all students");
         return studentService.findAll();
@@ -94,11 +94,11 @@ public class StudentResource implements IResource<Student>
      * @return the ResponseEntity with status 200 (OK) and the student in body, or 404 (Not found)
      */
     @RequestMapping(value = RESOURCE_NAME+"/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Student> get(@PathVariable int id)
+    public ResponseEntity<User> get(@PathVariable int id)
     {
         log.debug("REST request to get student: ", id);
 
-        Student student = studentService.findOne(id);
+        User student = studentService.findOne(id);
 
         return Optional.ofNullable(student)
                 .map(result -> new ResponseEntity<>(

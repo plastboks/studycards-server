@@ -1,6 +1,6 @@
 package net.plastboks.studycards.service;
 
-import net.plastboks.studycards.entity.Student;
+import net.plastboks.studycards.domain.User;
 import net.plastboks.studycards.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
@@ -11,21 +11,21 @@ import java.util.List;
  * Created by alex on 1/9/16.
  */
 @Service
-public class StudentService implements IService<Student>
+public class StudentService implements IService<User>
 {
     @Resource
     private StudentRepository studentRepository;
 
     @Override
-    public Student save(Student student)
+    public User save(User student)
     {
         return studentRepository.save(student);
     }
 
     @Override
-    public Student delete(int id)
+    public User delete(int id)
     {
-        Student s = studentRepository.findOne(id);
+        User s = studentRepository.findOne(id);
 
         studentRepository.delete(s);
 
@@ -33,13 +33,13 @@ public class StudentService implements IService<Student>
     }
 
     @Override
-    public List<Student> findAll()
+    public List<User> findAll()
     {
         return studentRepository.findAll();
     }
 
     @Override
-    public Student findOne(int id)
+    public User findOne(int id)
     {
         return studentRepository.findOne(id);
     }

@@ -1,4 +1,4 @@
-package net.plastboks.studycards.entity;
+package net.plastboks.studycards.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
